@@ -1,14 +1,73 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { palettes } from './palettes.js';
+//import { SchemeColor } from './components/SchemeColor/index.jsx';
+//import { Palette } from './components/Palette/index.jsx';
 import './style.css';
+
+const SchemeColor = ({colorp, bgcolorp}) => {
+  return (
+    <>
+    <div>
+      <div style={{ backgroundColor: bgcolorp, width: '100px', height: '50px',textAlign:'center'}}>{colorp}</div>
+    </div>
+    </>
+  )
+};
+
+
+const Palette = ({palleteData}) => {
+  return (
+    <div key={palettes.name}>
+    {palleteData.map ((item) => {
+      return (
+        <>
+    <div className="palette">
+          <div className={`palette-scheme palette-scheme--${item.direction}`}>
+            <img className="scheme-image" src={item.image} alt={item.attribution.name} />
+            <div className="scheme-colors">
+              <div className="scheme-color" style={{ backgroundColor: `${item.colors[0]}` }} >{item.colors[0]}</div>
+              <div className="scheme-color" style={{ backgroundColor: `${item.colors[1]}` }} >{item.colors[1]}</div>
+              <div className="scheme-color" style={{ backgroundColor: `${item.colors[2]}` }} >{item.colors[2]}</div>
+              <div className="scheme-color" style={{ backgroundColor: `${item.colors[3]}` }} >{item.colors[3]}</div>
+              <div className="scheme-color" style={{ backgroundColor: `${item.colors[4]}` }} >{item.colors[4]}</div>
+            </div>
+          </div>
+          <div className="palette-info">
+            <h2>{item.name}</h2>
+            <p>{item.description}</p>
+
+            <p>Photo by <a href={item.attribution.url} target="_blank">{item.attribution.name}</a>.</p>
+          </div>
+        </div>
+        </>
+      )})}
+    </div>
+  )
+};
+
 
 const App = () => {
   return (
-    <div className="container">
+      <div className="container">
       <header>
         <h1>Barevné palety</h1>
       </header>
       <main>
+        {/*splnění úkolu 8*/}
+      <div>
+        <Palette palleteData={palettes} />
+      </div>
+
+      {/* splnění úkolu 5 a 6 */}
+      {palettes[0].colors.map((col)=><div key={col} style={{ backgroundColor: col, width: '100px', height: '50px',textAlign:'center'}}>  {col} </div>)}
+      {palettes[1].colors.map((col)=><div key={col} style={{ backgroundColor: col, width: '100px', height: '50px',textAlign:'center'}}>  {col} </div>)}
+      
+      {/* splnění úkolu 7 */}
+      {palettes[0].colors.map((col)=><SchemeColor key={col} colorp = {col} bgcolorp={col} />)} 
+      {palettes[1].colors.map((col)=><SchemeColor key={col} colorp = {col} bgcolorp={col} />)} 
+
+
         <div className="palette">
           <div className="palette-scheme palette-scheme--vertical">
             <img className="scheme-image" src="/img/mimosa-retreat.jpg" alt="Mimosa Retreat" />
