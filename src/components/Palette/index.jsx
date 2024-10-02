@@ -1,6 +1,9 @@
+import React from 'react';
+import { palettes } from '../../palettes';
+
 export const Palette = ({palleteData}) => {
     return (
-      <>
+      <div key={palettes.name}>
       {palleteData.map ((item) => {
         return (
           <>
@@ -24,6 +27,6 @@ export const Palette = ({palleteData}) => {
           </div>
           </>
         )})}
-      </>
+      </div>
     )
   };
